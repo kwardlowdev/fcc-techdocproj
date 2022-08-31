@@ -1,0 +1,101 @@
+body {
+  background-color: #282828;
+}
+main {
+  color: #66ff66;
+  font-family: 'Andale Mono', monospace;
+  font-size: 18px;
+  display: flex;
+}
+
+#navbar {
+  width: 25%;
+  min-width: 25%;
+  max-width: 25%;
+  overflow: hidden;
+  position: fixed;
+}
+
+.nav-link {
+  display: block;
+  width: 95%;
+  margin: 20px 0;
+  border: 1px solid #66ff66;
+}
+
+.info {
+  width: 74%;
+  min-width: 74%;
+  max-width: 74%;
+  margin-left: 26%;
+}
+
+header {
+  font-family: 'Andale Mono', monospace;
+  font-weight: bold;
+  text-transform: uppercase; 
+}
+
+.codebox, header {
+  border: 1px solid #66CC88;
+  padding: 10px 10px 5px 10px;
+}
+
+.codecaption {
+  text-align: right;
+  font-size: .8em;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+.codecaption::before, .codecaption::after {
+  content: "//";
+}
+
+code {
+  display: block;
+  padding: 10px;
+  background-color: rgb(40, 30, 30);
+  border: 1px inset #66ff66;
+  overflow: hidden;
+}
+
+p {
+  text-indent: 5px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 525;
+}
+
+a::before{
+  content: "["
+}
+
+a::after {
+  content: "]"
+}
+
+a:link, a:visited {
+color: #66ff66;
+}
+
+::selection, a:hover, a:active {
+ background-color: #66ff66;
+ color: #282828;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.cright {
+  float: right;
+}
+
+@media (max-width:600px){
+  code {
+    overflow: scroll;
+  }
+}

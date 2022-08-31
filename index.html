@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Brainf**k: Unfricking The Language (Sort Of)</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width:device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+      <main id="main-doc">
+        <nav id="navbar">
+          <header class="navhead">BRAINFUCK: AN INTRO</header>
+          <a class="nav-link" href="#introduction">INTRODUCTION</a>
+          <a class="nav-link" href="#overview">OVERVIEW</a>
+          <a class="nav-link" href="#the_pointer">THE POINTER</a>
+          <a class="nav-link" href="#this_language_bytes">THIS LANGUAGE BYTES</a>
+          <a class="nav-link" href="#saying_hello_world">SAYING HELLO WORLD</a>
+          <a class="nav-link" href="#resources">RESOURCES</a>
+        </nav>
+        <div class="info">
+        <section id="introduction" class="main-section"><header>Introduction</header>
+        <p>Brainfuck is what is known as an esoteric programming language. An esoteric programming language is a coding language that serves a particular purpose outside of practical use, whether for fun or as an academic exercise.</p>
+        <p>Brainfuck, sometimes styled as "Brainf**k" given its proper name's potential for being considered rude or offensive, was invented in 1993 by Swiss computer engineer Urban Müller. His intention in its creation was to make a language with the smallest possible compiler...and also probably to make a language which produces some pretty confusing-looking code (he succeeded).</p>
+        <p>As an example, here is a simple program in Brainfuck that outputs the string "Hello World!", a common first step for many learning programmers:</p>
+        <div class="codebox">
+          <code> ++++++++++[>+>+++>+++++++>++++++++>++++++++++<<<<<-]>>++>++.>>+.+++++++..+++.<<<.>>+++++++.>.+++.------.--------.<<<+.-. </code>
+          <p class="codecaption">Hello World! by Kyle Wardlow</p>
+        </div>
+        <p>It looks weird and confusing, right? Maybe enough to frick with your brain? Mission accomplished, Mr. Müller!</p>
+        <p>In this document, I will be explaining the basics of Brainfuck, how to create a simple program in it, and provide some resources should you want to learn more. This document assumes the reader has some general understanding of terms used in computer programming. If you are brand new to programming, please check the <a href="#resources">resources section</a> below for some starting points and leave the fricking of your brain for a little later.</p>
+        </section>
+        <section id="overview" class="main-section">
+          <header>Overview</header>
+          <p>Brainfuck programs involve the use of an one-dimensional array of cells with an initial value of zero. Each "cell" is actually 1 byte, which is important to know to understand how output works in the language. The default quantity of those cells is 30,000.</p>
+          <div class="codebox">
+            <code> [0,0,0,0,0,0,0,0]</code>
+            <p class="codecaption">Imagine this, but way longer.</p>
+          </div>
+          <p>The commands that form the syntax of the language essentially involve moving a data pointer along this array, increasing or decreasing the value of whatever cell is currently being "pointed" at through code or user input, and ultimately outputting the value of a cell or cells in order to produce a useful result.</p>
+          <p>One of the more interesting things about Brainfuck is its misleading simplicity. Brainfuck has only 8 valid commands! They are:</p>
+          <div class="list">
+            <ul>
+              <li>> = moves the data pointer 1 cell to the right.</li>
+              <li>< = moves the data pointer 1 cell to the left.</li>
+              <li>+ = increases the value of the cell the pointer is on by 1.</li>
+              <li>- = decreases the value of the cell the pointer is on by 1.</li>
+              <li>. = outputs the value of the cell the pointer is on.</li>
+              <li>, = accepts one byte of input from the user and stores the value to the cell the pointer is on.</li>
+              <li>[ = this will execute code as long as the cell value at the current pointer location is not zero. If it's zero, the code will jump forward to its corresponding ] and execute from there.</li>
+              <li>] = this will jump backward to the command immediately following its corresponding [ unless the value of the cell the pointer is currently at is zero.</li>
+            </ul>
+          </div>
+        </section>
+        <section id="the_pointer" class="main-section">
+          <header>The Pointer</header>
+          <p>While some would argue that Brainfuck has no "point", it certainly has a pointer!</p>
+          <p>The pointer begins, in most implementations of Brainfuck, at the leftmost cell in the array. Its location within the array is very important to keep track of as the "[" and "]" commands require clever manipulation of values at the pointer locations they correspond to in order to utilize more complex logic.</p>
+          <p>The pointer will end the program once it is allowed to pass past the last available command.</p>
+        </section>        
+        <section id="this_language_bytes" class="main-section">
+          <header>This Language Bytes</header>
+          <p>The "cells" within the array are actually bytes of data, which helps when trying to understand how to generate any output from a Brainfuck program</p>
+          <p>Since each "cell" is a byte, its value is constrained by the maximum value of a byte of data (255).</p>
+          <p>This also means that any individual cell's value can map to character codes of corresponding values within the ASCII or sometimes UTF-8 character sets.</p>
+          <p>As a Turing-complete language, Brainfuck could theoretically be used to solve any given calculation given enough time, but for the purposes of this document, and given the limited experience of its author, we will only be looking at breaking down the above "Hello World!" program in the next section as an example of how the language works.</p>
+        </section>
+        <section id="saying_hello_world" class="main-section">
+          <header>Saying Hello World</header>
+          <p>In order to give a base level demonstration of how Brainfuck operates, let's break down the code mentioned in the <a href="#introduction">Introduction</a> and see what, exactly, is going on there.</p>
+       <div class="codebox">
+          <code> ++++++++++[>+>+++>+++++++>++++++++>++++++++++<<<<<-]</code>
+          <p class="codecaption">Step 1: The Setup</p>
+        </div>
+        <p>In this section of code, we set the initial value of the first cell with 10 using 10 individual increment commands.</p>
+        <p>After that, we initiate a loop with "[" and begin manipulating the values of the next few cells using the following logic:</p>
+        <div class="list">
+        <ol>
+          <li>Move to the right 1 space and add 1 to its value.</li>
+          <li>Move again to the right and add 3 to that cell's value.</li>
+          <li>Move again to the right and add 7 to that cell's value.</li>
+          <li>Move again to the right and add 8 to that cell's value.</li>
+          <li>Move yet again to the right and add 10 to that cell's value.</li>
+          <li>Move to the left 5 times to the initial cell and subtract 1 from its value, then "]" will check to see if that value is 0, and if not then the process will restart.</li>
+          </ol>
+        </div>
+        <p>Essentially, the first cell value will act, in this circumstance, as the count for how many times each of the containing additions happen. To illustrate, let's look at how the values of the cells should change throughout this code's first execution:</p>
+        <div class="codebox">
+          <code> CODE <span class="cright">VALUES</span><br>
+            ++++++++++ <span class="cright">[10,0,...]</span><br>
+            [>+ <span class="cright">[10,1,...]</span><br>
+            >+++ <span class="cright">[10,1,3,...]</span><br>
+            >+++++++ <span class="cright">[10,1,3,7,...]</span></br>
+            >++++++++ <span class="cright">[10,1,3,7,8,...]</span><br>
+            >++++++++++ <span class="cright">[10,1,3,7,8,10,...]</span><br>
+            <<<<<-]<span class="cright">[9,1,3,7,8,10,...]</span>
+            </code>
+          <p class="codecaption">Step 2: Understanding The Setup</p>
+        </div>
+        <p>From there, it will restart the dance of the "move right and add" until the initial value of the first cell is 0, effectively multiplying each cell's "addition amount" (the number of +'s given to each in the loop) by the starting value 10.</p>
+        <p>We end the loop with the values: [(0),10,30,70,80,100] with () marking our current position.</p>
+        <p>Now, we need to look at the output code. For this one, I've commented the code out to be easier to understand</p>
+        <div class="codebox">
+          <code> >>++ //move 2 to the right and add 2<br>
+          >++. //move 1 to the right, add 2 then output<br>
+          >>+. //move 2 to the right, add 1 then output<br>
+          +++++++.. //add 7 then output twice<br>
+          +++. //add 3 then output <br>
+          <<<. //move 3 to the left, output<br>
+          >>+++++++. //move 2 to the right, add 7 then output<br> 
+          >. //move 1 to the right, output<br>
+          +++. //add 3, output<br>
+          ------. //subtract 6, output<br>
+          --------. //subtract 8, output<br>
+          <<<+. //move 3 to the left, add 1 and output<br>
+          -. //subtract one, output</code>
+          <p class="codecaption">Step 3: Saying Hello</p>
+        </div>
+        <p>If you guessed that this code is just jumping around the values we created in the setup, changing them into the correct Ascii values (see <a href="#resources">resources</a> for more info) for each letter in "Hello World!" and outputting them, then you're right!</p>
+        <p>Brainfuck, as you can see, has some initially interesting uses, and people around the world have made even more interesting programs in the language that you should check out. Ultimately, though, the language itself is not ideal to learn for anything other than to give your brain a workout. 
+          </section>
+        <section id="resources" class="main-section">
+          <header>Resources</header>
+          <p>In order to produce this document, I relied on some info regarding the nature of Brainfuck as a language as well as some info on its creator. The references used within this document are as follows:<p>
+            <div class="list">
+              <ul>
+                <li><a href="https://www.neperos.com/article/raqehg6b24ceadba">"The Discordant Opposition Journal: Issue 10-File 19. An Elegant Programming Language: Brainfuck"</a> Accessed 08/29/2022.</li>
+                <li><a href="http://www.muppetlabs.com/~breadbox/bf/">Muppetlabs article on Brainfuck</a> Accessed 08/29/2022.</li>
+                <li><a href="https://en.wikipedia.org/wiki/Brainfuck">Wikipedia Entry: Brainfuck</a> Accessed 08/29/2022.</li>
+                <li><a href="https://www.asciitable.com/">ASCII Table Reference: ASCIITable.com</a> Accessed 08/29/2022.</li>
+                </ul>
+                </div>
+        </section>
+      </main>
+      </div>
+    </body>
+</html>
